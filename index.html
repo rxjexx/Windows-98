@@ -2,6 +2,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Retro '98 Portfolio</title>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Handjet:wght@700;900&amp;family=Inter:wght@400;700&amp;family=VT323&amp;display=swap">
 <style>
@@ -537,9 +541,10 @@ gtag('config', 'G-2M6V79H761');
         <span class="ml">Help</span>
       </div>
       <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
-        <div class="win98-sunken" style="padding:10px;background:#000;color:#00FF00;font-family:'VT323',monospace;font-size:18px;line-height:1.2;min-height:60px">
-          <div id="mp-track" style="color:#00FF00">♪ Press Play to Begin</div>
-          <div id="mp-artist" style="color:#808080;font-size:14px;margin-top:4px"></div>
+        <div class="win98-sunken" style="padding:10px;background:#000;color:#00FF00;font-family:'VT323',monospace;font-size:16px;line-height:1.4;min-height:70px">
+          <div id="mp-track" style="color:#00FF00;font-weight:bold;font-size:14px">-- STOPPED --</div>
+          <div id="mp-artist" style="color:#00FF00;font-size:12px;margin-top:4px"></div>
+          <div id="mp-time" style="color:#00FF00;font-size:12px;margin-top:6px">00:00 / 00:00</div>
         </div>
         <div style="display:flex;gap:6px;justify-content:center">
           <button id="mp-prev" class="win98-raised pixel-text" style="width:48px;height:36px;font-size:16px;border:0;cursor:pointer">
@@ -561,18 +566,19 @@ gtag('config', 'G-2M6V79H761');
             <input id="mp-vol" type="range" min="0" max="1" step="0.05" value="0.6" style="flex:1;margin:0">
           </div>
         </div>
-        <div id="mp-playlist" class="win98-sunken" style="background:#fff;max-height:120px;overflow-y:auto;font-family:Georgia,serif;font-size:14px;scrollbar-width:none;-ms-overflow-style:none">
-          <div style="padding: 6px 10px; cursor: pointer; background: rgb(0, 0, 128); color: rgb(255, 255, 255);">
-            1. Jesus, sometimes i..
+        <div style="font-family:'VT323',monospace;font-size:12px;color:#000;font-weight:bold">PLAYLIST</div>
+        <div id="mp-playlist" class="win98-sunken" style="background:#000;max-height:120px;overflow-y:auto;font-family:'VT323',monospace;font-size:12px;scrollbar-width:none;-ms-overflow-style:none">
+          <div style="padding: 6px 10px; cursor: pointer; background: rgb(0, 0, 128); color: #00FF00;">
+            1. Impact Moderato
           </div>
-          <div style="padding: 6px 10px; cursor: pointer; color: rgb(0, 0, 0);">
-            2. The Weeknd, Lana Del Rey - The Abyss
+          <div style="padding: 6px 10px; cursor: pointer; color: #00FF00;">
+            2. Cipher
           </div>
-          <div style="padding: 6px 10px; cursor: pointer; color: rgb(0, 0, 0);">
-            3. OKSII - Shurter
+          <div style="padding: 6px 10px; cursor: pointer; color: #00FF00;">
+            3. Carefree
           </div>
-          <div style="padding: 6px 10px; cursor: pointer; color: rgb(0, 0, 0);">
-            4. Kanye West - Run Right Back To Me
+          <div style="padding: 6px 10px; cursor: pointer; color: #00FF00;">
+            4. Wallpaper
           </div>
         </div>
         <audio id="mp-audio" preload="none"></audio>
@@ -582,7 +588,7 @@ gtag('config', 'G-2M6V79H761');
       </div>
     </div>
     <script>
-      (function(){var tracks=[{title:'Impact Moderato',artist:'Kevin MacLeod',src:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Impact%20Moderato.mp3'},{title:'Cipher',artist:'Kevin MacLeod',src:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Cipher.mp3'},{title:'Carefree',artist:'Kevin MacLeod',src:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Carefree.mp3'},{title:'Wallpaper',artist:'Kevin MacLeod',src:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Wallpaper.mp3'}];var audio=document.getElementById('mp-audio');var idx=0;var pl=document.getElementById('mp-playlist');var trackEl=document.getElementById('mp-track');var artistEl=document.getElementById('mp-artist');var status=document.getElementById('mp-status');function renderPL(){pl.innerHTML='';tracks.forEach(function(t,i){var d=document.createElement('div');d.style.cssText='padding:6px 10px;cursor:pointer;'+(i===idx?'background:#000080;color:#fff':'color:#000');d.textContent=(i+1)+'. '+t.title+' — '+t.artist;d.addEventListener('click',function(){idx=i;load(true)});pl.appendChild(d)})}function load(autoplay){var t=tracks[idx];audio.src=t.src;trackEl.textContent='♪ '+t.title;artistEl.textContent=t.artist;renderPL();if(autoplay){audio.play().then(function(){status.textContent='Playing'}).catch(function(){status.textContent='Click Play'})}}document.getElementById('mp-play').addEventListener('click',function(){if(!audio.src)load(false);audio.play().then(function(){status.textContent='Playing'}).catch(function(){status.textContent='Error'})});document.getElementById('mp-pause').addEventListener('click',function(){audio.pause();status.textContent='Paused'});document.getElementById('mp-next').addEventListener('click',function(){idx=(idx+1)%tracks.length;load(true)});document.getElementById('mp-prev').addEventListener('click',function(){idx=(idx-1+tracks.length)%tracks.length;load(true)});document.getElementById('mp-vol').addEventListener('input',function(e){audio.volume=parseFloat(e.target.value)});audio.volume=0.6;audio.addEventListener('ended',function(){idx=(idx+1)%tracks.length;load(true)});document.getElementById('music-close').addEventListener('click',function(e){e.preventDefault();document.getElementById('music-player').style.display='none';audio.pause()});var mp=document.getElementById('music-player');var tb=document.getElementById('music-title-bar');var dragging=false,ox=0,oy=0,started=false;tb.addEventListener('mousedown',function(e){if(e.target.closest('.win-close'))return;dragging=true;started=false;var r=mp.getBoundingClientRect();ox=e.clientX-r.left;oy=e.clientY-r.top;e.preventDefault()});document.addEventListener('mousemove',function(e){if(!dragging)return;if(!started){var r=mp.getBoundingClientRect();mp.style.left=r.left+'px';mp.style.top=r.top+'px';started=true}mp.style.left=Math.max(0,Math.min(window.innerWidth-100,e.clientX-ox))+'px';mp.style.top=Math.max(0,Math.min(window.innerHeight-50,e.clientY-oy))+'px'});document.addEventListener('mouseup',function(){dragging=false});renderPL()})();
+      (function(){var tracks=[{title:'Impact Moderato',artist:'Kevin MacLeod',src:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Impact%20Moderato.mp3'},{title:'Cipher',artist:'Kevin MacLeod',src:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Cipher.mp3'},{title:'Carefree',artist:'Kevin MacLeod',src:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Carefree.mp3'},{title:'Wallpaper',artist:'Kevin MacLeod',src:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Wallpaper.mp3'}];var audio=document.getElementById('mp-audio');var idx=0;var pl=document.getElementById('mp-playlist');var trackEl=document.getElementById('mp-track');var artistEl=document.getElementById('mp-artist');var timeEl=document.getElementById('mp-time');var status=document.getElementById('mp-status');function formatTime(seconds){var h=Math.floor(seconds/3600);var m=Math.floor((seconds%3600)/60);var s=Math.floor(seconds%60);var time=(h>0?h+':':'')+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;return time}function updateTime(){var current=formatTime(audio.currentTime);var duration=formatTime(audio.duration||0);timeEl.textContent=current+' / '+duration}function renderPL(){pl.innerHTML='';tracks.forEach(function(t,i){var d=document.createElement('div');d.style.cssText='padding:6px 10px;cursor:pointer;font-family:\'VT323\',monospace;font-size:12px;'+(i===idx?'background:rgb(0, 0, 128);color:#00FF00':'color:#00FF00');d.textContent=(i+1)+'. '+t.title;d.addEventListener('click',function(){idx=i;load(true)});pl.appendChild(d)})}function load(autoplay){var t=tracks[idx];audio.src=t.src;trackEl.textContent=t.title;artistEl.textContent=t.artist;updateTime();renderPL();if(autoplay){audio.play().then(function(){status.textContent='Playing'}).catch(function(){status.textContent='Click Play'})}}document.getElementById('mp-play').addEventListener('click',function(){if(!audio.src)load(false);audio.play().then(function(){status.textContent='Playing'}).catch(function(){status.textContent='Error'})});document.getElementById('mp-pause').addEventListener('click',function(){audio.pause();status.textContent='Paused'});document.getElementById('mp-next').addEventListener('click',function(){idx=(idx+1)%tracks.length;load(true)});document.getElementById('mp-prev').addEventListener('click',function(){idx=(idx-1+tracks.length)%tracks.length;load(true)});document.getElementById('mp-vol').addEventListener('input',function(e){audio.volume=parseFloat(e.target.value)});audio.volume=0.6;audio.addEventListener('timeupdate',function(){updateTime()});audio.addEventListener('ended',function(){idx=(idx+1)%tracks.length;load(true)});document.getElementById('music-close').addEventListener('click',function(e){e.preventDefault();document.getElementById('music-player').style.display='none';audio.pause()});var mp=document.getElementById('music-player');var tb=document.getElementById('music-title-bar');var dragging=false,ox=0,oy=0,started=false;tb.addEventListener('mousedown',function(e){if(e.target.closest('.win-close'))return;dragging=true;started=false;var r=mp.getBoundingClientRect();ox=e.clientX-r.left;oy=e.clientY-r.top;e.preventDefault()});document.addEventListener('mousemove',function(e){if(!dragging)return;if(!started){var r=mp.getBoundingClientRect();mp.style.left=r.left+'px';mp.style.top=r.top+'px';started=true}mp.style.left=Math.max(0,Math.min(window.innerWidth-100,e.clientX-ox))+'px';mp.style.top=Math.max(0,Math.min(window.innerHeight-50,e.clientY-oy))+'px'});document.addEventListener('mouseup',function(){dragging=false});renderPL()})();
     </script>
     <div id="instagram-popup" style="position: absolute; left: 10%; top: 120px; width: 300px; background: rgb(192, 192, 192); box-shadow: rgb(10, 10, 10) -1px -1px 0px 0px inset, rgb(222, 222, 222) 1px 1px 0px 0px inset, rgb(128, 128, 128) -2px -2px 0px 0px inset, rgb(255, 255, 255) 2px 2px 0px 0px inset; z-index: 60; flex-direction: column; animation: 0.28s ease-out 0s 1 normal none running winOpen; display: none;">
       <div class="title-bar" id="ig-title-bar" style="cursor:move;user-select:none">
